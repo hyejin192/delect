@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [username,setUsername]=useState(''); 
+  const [password,setpassword]=useState('');
+  const onSubmit =(event)=> {
+    // form은 전송 후에 refresh(새로고침)되기 때문에 밑내용으로 막아야함
+    event.preventDefault(); 
+    console.log(username, password)
+  }
+
+  // onChange : input의 값이 바뀔때마다 실행하는 함수
+  // 단일태그는 반드시 닫는태그로 적기
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <form onSubmit={onSubmit}>
+      
+      <input placeholder='Username' value={username}      
+      onChange={(e)=>{setUsername(e.target.value)}}/><br/>
+
+      <input placeholder='Password' value={password}
+      onChange={(e)=>{setpassword(e.target.value)}}/><br/>
+      
+      <button type='submit'>Update</button>
+    </form>
+    </>
+    
   );
 }
 
